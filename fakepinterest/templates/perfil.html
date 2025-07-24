@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+
+
+{% block titulo %}
+Perfil fake do {{ username }}
+{% endblock %}
+
+{% block body %}
+<body>
+    <a href="{{ url_for('homepage') }}">Sair</a>
+    <h1>Perfil fake do {{ username }}</h1>
+</body>
+{% endblock %}
