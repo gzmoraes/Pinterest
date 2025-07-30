@@ -1,0 +1,16 @@
+{% extends "homepage.html" %}
+
+{% block titulo %}
+    Registro
+{% endblock %}
+
+{% block form %}
+<form method="POST">
+    {{ form.csrf_token }}
+    {{ form.username.label() }} {{ form.username(size=32) }}<br>
+    {{ form.email.label() }} {{ form.email(size=32) }}<br>
+    {{ form.senha.label() }} {{ form.senha(size=32) }}<br>
+    {{ form.senha_confirmacao.label() }} {{ form.senha_confirmacao(size=32) }}<br>
+    {{ form.botao_confirm() }}
+</form>
+{% endblock %}
