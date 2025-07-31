@@ -1,16 +1,21 @@
-{% extends "homepage.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+</head>
+<body>
+    <a href="{{ url_for('homepage') }}">Voltar</a>
+    <h1>Criar Conta</h1>
+    <form method="POST">
+        {{ form.csrf_token }}
+        {{ form.username.label() }} {{ form.username(size=32) }}<br>
+        {{ form.email.label() }} {{ form.email(size=32) }}<br>
+        {{ form.senha.label() }} {{ form.senha(size=32) }}<br>
+        {{ form.senha_confirmacao.label() }} {{ form.senha_confirmacao(size=32) }}<br>
+        {{ form.botao_confirm() }}
+    </form>
+</body>
+</html>
 
-{% block titulo %}
-    Registro
-{% endblock %}
-
-{% block form %}
-<form method="POST">
-    {{ form.csrf_token }}
-    {{ form.username.label() }} {{ form.username(size=32) }}<br>
-    {{ form.email.label() }} {{ form.email(size=32) }}<br>
-    {{ form.senha.label() }} {{ form.senha(size=32) }}<br>
-    {{ form.senha_confirmacao.label() }} {{ form.senha_confirmacao(size=32) }}<br>
-    {{ form.botao_confirm() }}
-</form>
-{% endblock %}
