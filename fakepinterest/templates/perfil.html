@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
 </head>
-<body>
-    <a href="{{ url_for('homepage') }}">Voltar</a>
 
+<body>
+    <nav>
+        <a href="{{ url_for('feedpage')}}">Feed</a>
+        <a href="{{ url_for('logout')}}">Sair da conta</a>
+    </nav>
+    
+   
     <h1>Perfil: {{ username.username }}</h1>
 
     {% if form %}
@@ -23,6 +28,6 @@
         <img src="{{ url_for('static', filename='fotos_posts/{}'.format(foto.imagem)) }}" alt="">
     {% endfor %}
     <br>
-    <a href="{{ url_for('logout')}}">Sair da conta</a>
+    
 </body>  
 </html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('perfilpage', id_user=current_user.id) }}">Perfil</a>
+    </nav>
+    <h1>Feed</h1>
+    {% for foto in fotos %}
+        <a href=" {{ url_for('perfilpage', id_user=foto.id_usuario) }}">
+            <img src="{{ url_for('static', filename='fotos_posts/{}'.format(foto.imagem)) }}" alt="">
+        </a>
+    {% endfor %}
+</body>
+</html>

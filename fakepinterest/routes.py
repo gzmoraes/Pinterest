@@ -7,6 +7,7 @@ import os
 from werkzeug.utils import secure_filename
 
 
+
 #pagina inicial
 @app.route('/', methods=['GET', 'POST'])
 def homepage():
@@ -15,8 +16,9 @@ def homepage():
         user = Usuario.query.filter_by(email=sign_in.email.data).first()
         if user and bcrypt.check_password_hash(user.senha, sign_in.senha.data): 
             login_user(user, remember=True)
-            return redirect(url_for("perfilpage", id_user=user.id))
+            return redirect(url_for("feedpage"))
     return render_template("homepage.html", form=sign_in)
+
 
 
 #pagina de login
@@ -34,8 +36,9 @@ def create_account():
         database.session.add(user)
         database.session.commit()
         login_user(user, remember=True)
-        return redirect(url_for("perfilpage", id_user=user.id))
+        return redirect(url_for("feedpage"))
     return render_template("login.html", form=login)
+
 
 
 #Pagina de perfil
@@ -61,8 +64,18 @@ def perfilpage(id_user):
         return render_template("perfil.html", username=usuario, form=None)
 
 
+
+
 @app.route('/logout')
 @login_required 
 def logout():
     logout_user()
     return redirect(url_for("homepage"))
+
+
+
+@app.route('/feed')
+@login_required
+def feedpage():
+    fotos = Foto.query.order_by(Foto.data_cracao.desc()).all()
+    return render_template("feed.html", fotos=fotos)
