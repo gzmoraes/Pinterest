@@ -1,9 +1,13 @@
 from flask import render_template, url_for, redirect    
 from fakepinterest import app, database, bcrypt
 from flask_login import login_required, login_user, logout_user, current_user
-from fakepinterest.forms import Form_sign_in, Form_login
+from fakepinterest.forms import Form_sign_in, Form_login, Form_Foto
 from fakepinterest.models import Usuario, Foto
+import os
+from werkzeug.utils import secure_filename
 
+
+#pagina inicial
 @app.route('/', methods=['GET', 'POST'])
 def homepage():
     sign_in = Form_sign_in()
@@ -15,7 +19,7 @@ def homepage():
     return render_template("homepage.html", form=sign_in)
 
 
-
+#pagina de login
 @app.route('/login', methods=['GET', 'POST'])
 def create_account():
     login = Form_login()
@@ -34,15 +38,27 @@ def create_account():
     return render_template("login.html", form=login)
 
 
-
-@app.route('/perfil/<id_user>')
+#Pagina de perfil
+@app.route('/perfil/<id_user>', methods=['GET', 'POST'])
 @login_required
 def perfilpage(id_user):
     if int(id_user) == int(current_user.id):
-        return render_template("perfil.html", username=current_user)
+        #Usuario esta vendo o proprio perfil
+        form_foto = Form_Foto()
+        if form_foto.validate_on_submit():
+            arquivo = form_foto.foto.data
+            nome_arquivo = secure_filename(arquivo.filename)
+            caminho = os.path.join(os.path.abspath(os.path.dirname(__file__)), app.config['UPLOAD_FOLDER'], nome_arquivo)
+            arquivo.save(caminho)
+
+            # Salvar a foto no banco de dados
+            foto = Foto(imagem=nome_arquivo, id_usuario=current_user.id)
+            database.session.add(foto)
+            database.session.commit()
+        return render_template("perfil.html", username=current_user, form=form_foto)
     else:
         usuario = Usuario.query.get(int(id_user))
-        return render_template("perfil.html", username=usuario)
+        return render_template("perfil.html", username=usuario, form=None)
 
 
 @app.route('/logout')

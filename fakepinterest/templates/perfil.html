@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,10 +10,19 @@
 
     <h1>Perfil: {{ username.username }}</h1>
 
-    {% for foto in username.fotos %}
-        <img src="" alt="">
-    {% endfor %}
+    {% if form %}
+        <form method="POST" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            {{ form.foto() }}<br><br>
+            {{ form.botao_confirm() }}
+        </form><br>
+    {% endif %}
 
+   
+    {% for foto in username.fotos %}
+        <img src="{{ url_for('static', filename='fotos_posts/{}'.format(foto.imagem)) }}" alt="">
+    {% endfor %}
+    <br>
     <a href="{{ url_for('logout')}}">Sair da conta</a>
 </body>  
 </html>
