@@ -48,24 +48,29 @@ fake_pinterest/
 ## Como executar
 
 1. Clone o repositório:
-   ```sh
+   ```
    git clone https://github.com/gzmoraes/fakepinterest.git
    cd fakepinterest
    
 
 2. Crie um ambiente virtual
+```
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
 venv\Scripts\activate     # Windows´
-
-3. Instale as dependências
+```
+4. Instale as dependências
+```
 pip install -r requirements.txt
-
-4. Execute a aplicação:
+```
+6. Execute a aplicação:
+```
 python main.py
-
-5. Acesse no navegador:
+```
+8. Acesse no navegador:
+```
 http://127.0.0.1:5000//
+```
 
 Licença
-Este projeto está licenciado sob a Licença Apache 2.0. Veja o arquivo LICENSE para mais detalhes. ```
+Este projeto está licenciado sob a Licença Apache 2.0. Veja o arquivo LICENSE para mais detalhes.
