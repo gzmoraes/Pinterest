@@ -48,10 +48,10 @@ fake_pinterest/
 ## Como executar
 
 1. Clone o repositório:
-   ```
-   git clone https://github.com/gzmoraes/fakepinterest.git
-   cd fakepinterest
-   
+```
+git clone https://github.com/gzmoraes/fakepinterest.git
+cd fakepinterest
+```
 
 2. Crie um ambiente virtual
 ```
